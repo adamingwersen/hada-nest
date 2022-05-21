@@ -1,0 +1,10 @@
+type Query {
+  getOrganisation(id: ID!): Organisation
+}
+
+type Organisation {
+  _id: ID!
+  name: String!
+  industryType: String!
+  planTier: String!
+}
