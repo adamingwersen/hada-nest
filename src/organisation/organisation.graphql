@@ -1,9 +1,23 @@
+scalar Date
+
 type Query {
-  getOrganisation(id: ID!): Organisation
+  findOrganisationById(id: ID!): Organisation
+}
+
+type Mutation {
+  createOrganisation(organisation: CreateOrganisationInput): Organisation
 }
 
 type Organisation {
-  _id: ID!
+  _id: ID
+  name: String!
+  industryType: String!
+  planTier: String!
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CreateOrganisationInput {
   name: String!
   industryType: String!
   planTier: String!

@@ -1,0 +1,33 @@
+scalar Date
+
+type Query {
+  findEmployeeById(id: ID!): Employee
+}
+
+type Mutation {
+  createEmployee(employee: CreateEmployeeInput): Employee
+}
+
+type Department {
+  name: String!
+}
+
+input DepartmentInput {
+  name: String!
+}
+
+type Employee {
+  _id: ID
+  name: String!
+  position: String!
+  departments: [Department!]
+  hireDate: Date!
+  endDate: Date
+}
+
+input CreateEmployeeInput {
+  name: String!
+  position: String!
+  departments: [DepartmentInput!]
+  hireDate: Date!
+}

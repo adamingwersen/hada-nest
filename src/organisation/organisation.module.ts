@@ -1,8 +1,16 @@
-import { Module } from '@nestjs/common';
-import { OrganisationService } from './organisation.service';
+import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
+import { OrganisationResolver } from "./organisation.resolver";
+import { OrganisationService } from "./organisation.service";
+import { OrganisationSchema } from "./schemas/organisation.schema";
 
 @Module({
-  providers: [OrganisationService],
-  exports: [OrganisationService],
+  imports: [
+    MongooseModule.forFeature([
+      { name: "Organisation", schema: OrganisationSchema },
+    ]),
+  ],
+  providers: [OrganisationService, OrganisationResolver],
+  exports: [OrganisationService, OrganisationResolver],
 })
 export class OrganisationModule {}
