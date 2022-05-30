@@ -1,11 +1,14 @@
+import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
+import { GraphQLModule } from "@nestjs/graphql";
+import { MongooseModule } from "@nestjs/mongoose";
+
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { MongooseModule } from "@nestjs/mongoose";
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { GraphQLModule } from "@nestjs/graphql";
-import { OrganisationModule } from "./organisation/organisation.module";
 import { EmployeeModule } from "./employee/employee.module";
+import { OrganisationModule } from "./organisation/organisation.module";
 
 @Module({
   imports: [
@@ -18,6 +21,7 @@ import { EmployeeModule } from "./employee/employee.module";
       typePaths: ["./**/*.graphql"],
       driver: ApolloDriver,
       playground: true,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
   ],
   controllers: [AppController],
