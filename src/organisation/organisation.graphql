@@ -1,11 +1,11 @@
 scalar Date
 
 type Query {
-  findOrganisationById(id: ID!): Organisation
+  findOrganisationById(id: ID!): Organisation!
 }
 
 type Mutation {
-  createOrganisation(organisation: CreateOrganisationInput): Organisation
+  createOrganisation(organisation: CreateOrganisationInput): Organisation!
 }
 
 type Organisation {

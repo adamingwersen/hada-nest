@@ -27,13 +27,13 @@ export class CreateOrganisationInput {
 export abstract class IQuery {
     abstract findEmployeeById(id: string): Nullable<Employee> | Promise<Nullable<Employee>>;
 
-    abstract findOrganisationById(id: string): Nullable<Organisation> | Promise<Nullable<Organisation>>;
+    abstract findOrganisationById(id: string): Organisation | Promise<Organisation>;
 }
 
 export abstract class IMutation {
     abstract createEmployee(employee?: Nullable<CreateEmployeeInput>): Nullable<Employee> | Promise<Nullable<Employee>>;
 
-    abstract createOrganisation(organisation?: Nullable<CreateOrganisationInput>): Nullable<Organisation> | Promise<Nullable<Organisation>>;
+    abstract createOrganisation(organisation?: Nullable<CreateOrganisationInput>): Organisation | Promise<Organisation>;
 }
 
 export class Department {

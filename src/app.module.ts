@@ -1,4 +1,4 @@
-import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+import { ApolloServerPluginUsageReportingDisabled } from "apollo-server-core";
 
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
@@ -10,18 +10,19 @@ import { AppService } from "./app.service";
 import { EmployeeModule } from "./employee/employee.module";
 import { OrganisationModule } from "./organisation/organisation.module";
 
+const mongodbConnectionString =
+  "mongodb+srv://admin:dgiTAFdg9yB5bg@hada-cluster-0.u89nn.mongodb.net/?retryWrites=true&w=majority";
+
 @Module({
   imports: [
+    MongooseModule.forRoot(mongodbConnectionString),
     OrganisationModule,
     EmployeeModule,
-    MongooseModule.forRoot(
-      "mongodb+srv://adamildk:cdTwPPHR6DfO3Qd6@hada-cluster-0.u89nn.mongodb.net/?retryWrites=true&w=majority",
-    ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       typePaths: ["./**/*.graphql"],
       driver: ApolloDriver,
       playground: true,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      plugins: [ApolloServerPluginUsageReportingDisabled()],
     }),
   ],
   controllers: [AppController],
