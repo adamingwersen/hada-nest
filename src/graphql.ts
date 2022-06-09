@@ -33,6 +33,8 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createEmployee(employee?: Nullable<CreateEmployeeInput>): Nullable<Employee> | Promise<Nullable<Employee>>;
 
+    abstract authenticate(token: string): AuthenticateResponse | Promise<AuthenticateResponse>;
+
     abstract createOrganisation(organisation?: Nullable<CreateOrganisationInput>): Organisation | Promise<Organisation>;
 }
 
@@ -49,6 +51,10 @@ export class Employee {
     endDate?: Nullable<Date>;
 }
 
+export class AuthenticateResponse {
+    success: boolean;
+}
+
 export class Organisation {
     _id?: Nullable<string>;
     name: string;
@@ -56,6 +62,12 @@ export class Organisation {
     planTier: string;
     createdAt?: Nullable<Date>;
     updatedAt?: Nullable<Date>;
+}
+
+export class User {
+    _id: string;
+    name: string;
+    email: string;
 }
 
 type Nullable<T> = T | null;

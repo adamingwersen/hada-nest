@@ -1,13 +1,15 @@
+import { Model } from "mongoose";
+
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+
 import { CreateOrganisationInput, Organisation } from "../graphql";
 import { Organisation as OrganisationModel } from "./schemas/organisation.schema";
 
 @Injectable()
 export class OrganisationService {
   constructor(
-    @InjectModel("Organisation")
+    @InjectModel(Organisation.name)
     private organisationModel: Model<OrganisationModel>,
   ) {}
 

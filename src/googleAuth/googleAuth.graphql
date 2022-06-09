@@ -1,0 +1,7 @@
+type Mutation {
+  authenticate(token: String!): AuthenticateResponse!
+}
+
+type AuthenticateResponse {
+  success: Boolean!
+}

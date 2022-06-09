@@ -1,7 +1,9 @@
 import { ApolloServerPluginUsageReportingDisabled } from "apollo-server-core";
+import * as Joi from "joi";
 
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { GraphQLModule } from "@nestjs/graphql";
 import { MongooseModule } from "@nestjs/mongoose";
 
@@ -10,12 +12,17 @@ import { AppService } from "./app.service";
 import { EmployeeModule } from "./employee/employee.module";
 import { OrganisationModule } from "./organisation/organisation.module";
 
-const mongodbConnectionString =
-  "mongodb+srv://admin:dgiTAFdg9yB5bg@hada-cluster-0.u89nn.mongodb.net/?retryWrites=true&w=majority";
-
 @Module({
   imports: [
-    MongooseModule.forRoot(mongodbConnectionString),
+    ConfigModule.forRoot({
+      validationSchema: Joi.object({
+        GOOGLE_CLIENT_ID: Joi.string().required(),
+        GOOGLE_CLIENT_SECRET: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION_TIME: Joi.number().required(),
+      }),
+    }),
+    MongooseModule.forRoot(process.env.MONGO_DB_URI),
     OrganisationModule,
     EmployeeModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
