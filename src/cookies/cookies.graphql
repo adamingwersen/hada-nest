@@ -1,0 +1,31 @@
+type Mutation {
+  createCookie(cookie: CreateCookieInput): Cookie
+}
+
+type Cookie {
+  name: String!
+  value: String!
+  domain: String!
+  path: String
+  expires: String
+  httpOnly: Boolean
+  secure: Boolean
+  sameSite: String
+  hostOnly: Boolean
+  session: Boolean
+  storeId: String
+}
+
+input CreateCookieInput {
+  name: String!
+  value: String!
+  domain: String!
+  path: String
+  expires: String
+  httpOnly: Boolean
+  secure: Boolean
+  sameSite: String
+  hostOnly: Boolean
+  session: Boolean
+  storeId: String
+}

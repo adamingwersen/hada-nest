@@ -11,6 +11,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { EmployeeModule } from "./employee/employee.module";
 import { OrganisationModule } from "./organisation/organisation.module";
+import { CookiesModule } from './cookies/cookies.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { OrganisationModule } from "./organisation/organisation.module";
       playground: true,
       plugins: [ApolloServerPluginUsageReportingDisabled()],
     }),
+    CookiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

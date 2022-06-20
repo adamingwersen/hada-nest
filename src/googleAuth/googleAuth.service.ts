@@ -87,7 +87,7 @@ export class GoogleAuthService {
 
       return this.handleRegisteredUser(user);
     } catch (error) {
-      if (error.status !== 404) {
+      if (error?.status !== 404) {
         throw new error();
       }
 
