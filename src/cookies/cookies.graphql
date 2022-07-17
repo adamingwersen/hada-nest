@@ -1,5 +1,25 @@
 type Mutation {
-  createCookie(cookie: CreateCookieInput): Cookie
+  upsertCookie(
+    cookies: [CreateCookieInput!]!
+    domain: String!
+    orgId: String!
+    email: String!
+  ): CookieCollection
+}
+
+type Query {
+  getSupportedDomains: [String]
+  getUnsupportedDomains: [String]
+  getCookiesByOrgId(orgId: ID!): [CookieCollection]
+}
+
+type CookieCollection {
+  _id: ID
+  orgId: String!
+  email: String!
+  domain: String!
+  cookies: [Cookie!]!
+  iv: String
 }
 
 type Cookie {
@@ -7,7 +27,7 @@ type Cookie {
   value: String!
   domain: String!
   path: String
-  expires: String
+  expirationDate: Float
   httpOnly: Boolean
   secure: Boolean
   sameSite: String
@@ -21,7 +41,7 @@ input CreateCookieInput {
   value: String!
   domain: String!
   path: String
-  expires: String
+  expirationDate: Float
   httpOnly: Boolean
   secure: Boolean
   sameSite: String

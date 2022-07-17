@@ -6,18 +6,24 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
   timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   autoCreate: true,
 })
-export class Organisation extends Document {
+export class Cookies extends Document {
   @Prop()
   id: Types.ObjectId;
 
   @Prop({ required: true })
-  name: string;
+  orgId: string;
 
   @Prop({ required: true })
-  industryType: string;
+  email: string;
 
   @Prop({ required: true })
-  planTier: string;
+  domain: string;
+
+  @Prop({ required: true })
+  cookies: Buffer;
+
+  @Prop({ required: true })
+  iv: string;
 }
 
-export const OrganisationSchema = SchemaFactory.createForClass(Organisation);
+export const CookiesSchema = SchemaFactory.createForClass(Cookies);

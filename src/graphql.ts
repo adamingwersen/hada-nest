@@ -12,7 +12,7 @@ export class CreateCookieInput {
     value: string;
     domain: string;
     path?: Nullable<string>;
-    expires?: Nullable<string>;
+    expirationDate?: Nullable<number>;
     httpOnly?: Nullable<boolean>;
     secure?: Nullable<boolean>;
     sameSite?: Nullable<string>;
@@ -39,7 +39,7 @@ export class CreateOrganisationInput {
 }
 
 export abstract class IMutation {
-    abstract createCookie(cookie?: Nullable<CreateCookieInput>): Nullable<Cookie> | Promise<Nullable<Cookie>>;
+    abstract upsertCookie(cookies: CreateCookieInput[], domain: string, orgId: string, email: string): Nullable<CookieCollection> | Promise<Nullable<CookieCollection>>;
 
     abstract createEmployee(employee?: Nullable<CreateEmployeeInput>): Nullable<Employee> | Promise<Nullable<Employee>>;
 
@@ -48,24 +48,39 @@ export abstract class IMutation {
     abstract createOrganisation(organisation?: Nullable<CreateOrganisationInput>): Organisation | Promise<Organisation>;
 }
 
+export abstract class IQuery {
+    abstract getSupportedDomains(): Nullable<Nullable<string>[]> | Promise<Nullable<Nullable<string>[]>>;
+
+    abstract getUnsupportedDomains(): Nullable<Nullable<string>[]> | Promise<Nullable<Nullable<string>[]>>;
+
+    abstract getCookiesByOrgId(orgId: string): Nullable<Nullable<CookieCollection>[]> | Promise<Nullable<Nullable<CookieCollection>[]>>;
+
+    abstract findEmployeeById(id: string): Nullable<Employee> | Promise<Nullable<Employee>>;
+
+    abstract findOrganisationById(id: string): Organisation | Promise<Organisation>;
+}
+
+export class CookieCollection {
+    _id?: Nullable<string>;
+    orgId: string;
+    email: string;
+    domain: string;
+    cookies: Cookie[];
+    iv?: Nullable<string>;
+}
+
 export class Cookie {
     name: string;
     value: string;
     domain: string;
     path?: Nullable<string>;
-    expires?: Nullable<string>;
+    expirationDate?: Nullable<number>;
     httpOnly?: Nullable<boolean>;
     secure?: Nullable<boolean>;
     sameSite?: Nullable<string>;
     hostOnly?: Nullable<boolean>;
     session?: Nullable<boolean>;
     storeId?: Nullable<string>;
-}
-
-export abstract class IQuery {
-    abstract findEmployeeById(id: string): Nullable<Employee> | Promise<Nullable<Employee>>;
-
-    abstract findOrganisationById(id: string): Organisation | Promise<Organisation>;
 }
 
 export class Department {

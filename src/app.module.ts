@@ -7,11 +7,9 @@ import { ConfigModule } from "@nestjs/config";
 import { GraphQLModule } from "@nestjs/graphql";
 import { MongooseModule } from "@nestjs/mongoose";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { CookiesModule } from "./cookies/cookies.module";
 import { EmployeeModule } from "./employee/employee.module";
 import { OrganisationModule } from "./organisation/organisation.module";
-import { CookiesModule } from './cookies/cookies.module';
 
 @Module({
   imports: [
@@ -34,7 +32,7 @@ import { CookiesModule } from './cookies/cookies.module';
     }),
     CookiesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
