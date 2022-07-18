@@ -53,11 +53,17 @@ export abstract class IQuery {
 
     abstract getUnsupportedDomains(): Nullable<Nullable<string>[]> | Promise<Nullable<Nullable<string>[]>>;
 
-    abstract getCookiesByOrgId(orgId: string): Nullable<Nullable<CookieCollection>[]> | Promise<Nullable<Nullable<CookieCollection>[]>>;
+    abstract getCookiesByOrgId(orgId: string): CookieCollection[] | Promise<CookieCollection[]>;
 
     abstract findEmployeeById(id: string): Nullable<Employee> | Promise<Nullable<Employee>>;
 
     abstract findOrganisationById(id: string): Organisation | Promise<Organisation>;
+}
+
+export class CookieDomains {
+    orgId: string;
+    email: string;
+    domain: string;
 }
 
 export class CookieCollection {

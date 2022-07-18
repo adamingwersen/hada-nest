@@ -32,7 +32,8 @@ export class CookiesResolver {
   }
 
   @Query("getCookiesByOrgId")
-  async getCookiesByOrgId(orgId: string) {
+  // TODO: Auth guard
+  async getCookiesByOrgId(@Args("orgId") orgId: string) {
     return this.cookiesService.findEncryptedByOrgId(orgId);
   }
 

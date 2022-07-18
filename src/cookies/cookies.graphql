@@ -10,7 +10,13 @@ type Mutation {
 type Query {
   getSupportedDomains: [String]
   getUnsupportedDomains: [String]
-  getCookiesByOrgId(orgId: ID!): [CookieCollection]
+  getCookiesByOrgId(orgId: String!): [CookieCollection!]!
+}
+
+type CookieDomains {
+  orgId: String!
+  email: String!
+  domain: String!
 }
 
 type CookieCollection {
